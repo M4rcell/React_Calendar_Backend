@@ -11,14 +11,11 @@ const app = express();
 app.use(express.static('public'));
 
 // Rutas
+app.use('/api/auth', require('./routers/auth'));
+//TODO: auth  // crerar, login ,new
 
-app.get('/',(req,res)=>{
+//TODO: CRUD de eventos
 
-    console.log('se requiere /');
-    res.json({
-        ok:true 
-    })
-});
 
 
 //escuchar peticiones
