@@ -6,10 +6,12 @@
 const {Router} = require('express');
 //const router = express.Router;
 const {check} = require('express-validator');
-const router=Router();
+const {validarCampos}=require('../middlewares/validar-campos');
 
 //traendo funciones desde el controlador
 const {crearUsuario,loginUsuario,revalidarToken,} = require('../controllers/auth');
+
+const router=Router();
 
 router.post(
     '/new',
@@ -17,6 +19,7 @@ router.post(
         check('name','El nombre es obligatorio').not().isEmpty(),//campo de names es obligatio y no debe ser vacio
         check('email','El email es obligatorio').isEmail(),
         check('password','El password debe de ser de 6 caracteres').isLength({min:6}),
+        validarCampos,
     ],
     crearUsuario);
 
@@ -25,6 +28,7 @@ router.post(
     [
         check('email','El email es obligatorio').isEmail(),
         check('password','El password debe de ser de 6 caracteres').isLength({min:6}),
+        validarCampos
     ],
     loginUsuario
     );

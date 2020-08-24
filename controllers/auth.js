@@ -7,14 +7,14 @@ const crearUsuario = (req,res=response)=>{
    const {name,email,password} = req.body;
  
    //manejo de Errores
-   const error = validationResult(req);
+  /*  const error = validationResult(req);
     if (!error.isEmpty()) {
       
         return res.status(400).json({
             ok:false,
             error:error.mapped()
         })
-    }
+    } */
 
     res.status(201).json({
         ok:true ,
@@ -29,16 +29,6 @@ const loginUsuario =(req,res=response)=>{
    
     const {email,password} = req.body;
     
-    //manejo de Errores
-    const error = validationResult(req);
-    console.log(error);
-    if (!error.isEmpty()) {
-      
-        return res.status(400).json({
-            ok:false,
-            error:error.mapped()
-        })
-    }
     res.status(201).json({
         ok:true ,
         msg:'login',
