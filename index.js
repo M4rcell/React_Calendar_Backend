@@ -10,9 +10,12 @@ const app = express();
 // directorio publico html
 app.use(express.static('public'));
 
+//midelware lectura y parseo de body
+app.use(express.json());
+
 // Rutas
 app.use('/api/auth', require('./routers/auth'));
-//TODO: auth  // crerar, login ,new
+//TODO: auth  // new, login ,renew
 
 //TODO: CRUD de eventos
 
@@ -22,6 +25,6 @@ app.use('/api/auth', require('./routers/auth'));
 
 app.listen(process.env.PORT,()=>{
 
-    console.log(`Servidor corriendo en elv puerto ${process.env.PORT}`);
+    console.log(`Servidor corriendo en el puerto ${process.env.PORT}`);
 
 });
