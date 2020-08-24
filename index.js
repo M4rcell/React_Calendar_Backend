@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 
 
-// directorio publico
+// directorio publico html
 app.use(express.static('public'));
 
 // Rutas
