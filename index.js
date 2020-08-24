@@ -1,10 +1,14 @@
 const express = require('express');
+require('dotenv').config();
 
-
+//console.log(process.env);
 
 // crear el servidor de express
 const app = express();
 
+
+// directorio publico
+app.use(express.static('public'));
 
 // Rutas
 
@@ -19,8 +23,8 @@ app.get('/',(req,res)=>{
 
 //escuchar peticiones
 
-app.listen(4000,()=>{
+app.listen(process.env.PORT,()=>{
 
-    console.log(`Servidor corriendo en elv puerto ${4000}`);
+    console.log(`Servidor corriendo en elv puerto ${process.env.PORT}`);
 
 });
