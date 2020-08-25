@@ -16,6 +16,7 @@ app.use(express.static('public'));
 //midelware lectura y parseo de body
 app.use(express.json());
 
+
 // Rutas
 app.use('/api/auth', require('./routers/auth'));
 //TODO: auth  // new, login ,renew
