@@ -1,4 +1,5 @@
 const  {response} = require('express'); //ayuda al excribir res.json
+const bcrypt= require('bcryptjs');
 const Usuario = require('../models/Usuario');
 //const {validationResult} = require('express-validator');
 
@@ -29,11 +30,15 @@ const crearUsuario = async(req,res=response)=>{
         }
 
         usuario = new Usuario(req.body);
+
+        //Encriptar de contraseña 
+        const salt = bcrypt.genSaltSync();
+        usuario.password = bcrypt.hashSync(password,salt);
         
         await usuario.save();
     
         res.status(201).json({
-            
+
             ok:true ,
             msg:'el usuario se registro correctamente',
             uid:usuario.id,
