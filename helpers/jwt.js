@@ -16,13 +16,13 @@ const generarJWT = (uid,name)=>{
             },//tiempo de expirecion 
             (err,token)=>{
                 if (err) {
-                    console.log(err)
+                    console.log(err);
                     reject('No se puede generar el token');
                 }
                 resolve(token);
             });
 
-    })
+    });
 
 }
 
