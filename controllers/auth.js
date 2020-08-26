@@ -5,7 +5,7 @@ const Usuario = require('../models/Usuario');
 
 const crearUsuario = async(req,res=response)=>{
 
-    //const {name,email,password} = req.body;
+    const {email,password} = req.body;
     //manejo de Errores
     /*  const error = validationResult(req);
     if (!error.isEmpty()) {
@@ -15,18 +15,29 @@ const crearUsuario = async(req,res=response)=>{
             error:error.mapped()
         })
     } */
+
     try {
-        const usuario = new Usuario(req.body);
+        
+        let usuario = await Usuario.findOne({email});
+
+        if (usuario) {
+            return res.status(400).json({
+                ok:false,
+                msg:'Un usuario existe con ese correo',
+            });
+            
+        }
+
+        usuario = new Usuario(req.body);
         
         await usuario.save();
     
         res.status(201).json({
+            
             ok:true ,
-            msg:'el usuario seS registro correctamenteS',
-            /* name,
-            email,
-            password, 
-            */
+            msg:'el usuario se registro correctamente',
+            uid:usuario.id,
+            name:usuario.name,
         });
         
     } catch (error) {
