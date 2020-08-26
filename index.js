@@ -1,5 +1,7 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
+
 const {dbConnection} = require('./database/config');
  
 //console.log(process.env);
@@ -10,6 +12,8 @@ const app = express();
 //Base de Datos
 dbConnection();
 
+//CORS permiter solo los dominios se conecten
+app.use(cors())
 // directorio publico html
 app.use(express.static('public'));
 
