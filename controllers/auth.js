@@ -1,28 +1,42 @@
 const  {response} = require('express'); //ayuda al excribir res.json
-const {validationResult} = require('express-validator');
+const Usuario = require('../models/Usuario');
+//const {validationResult} = require('express-validator');
 
 
-const crearUsuario = (req,res=response)=>{
+const crearUsuario = async(req,res=response)=>{
 
-   const {name,email,password} = req.body;
- 
-   //manejo de Errores
-  /*  const error = validationResult(req);
+    //const {name,email,password} = req.body;
+    //manejo de Errores
+    /*  const error = validationResult(req);
     if (!error.isEmpty()) {
-      
+        
         return res.status(400).json({
             ok:false,
             error:error.mapped()
         })
     } */
-
-    res.status(201).json({
-        ok:true ,
-        msg:'Registro',
-        name,
-        email,
-        password,
-    });
+    try {
+        const usuario = new Usuario(req.body);
+        
+        await usuario.save();
+    
+        res.status(201).json({
+            ok:true ,
+            msg:'el usuario seS registro correctamenteS',
+            /* name,
+            email,
+            password, 
+            */
+        });
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'por favor hable con el adminsitrador'
+        })
+        
+    }
 }
 
 const loginUsuario =(req,res=response)=>{
