@@ -1,12 +1,12 @@
 const  {response} = require('express'); 
-
+const Evento = require('../models/Evento');//traer schema de modelo
 
 const getEventos = (req,res=response)=>{  
 
     try {
         res.status(201).json({
             ok:true ,
-            msg:'obtener todo los eventos',
+            msg:'obtener todo los eventos'
         });
         
     } catch (error) {
@@ -19,14 +19,18 @@ const getEventos = (req,res=response)=>{
     }
 }
 
-const crearEvento = (req,res=response)=>{  
+const crearEvento =async (req,res=response)=>{  
     //verificar que tenga el evento
-     console.log(req.body);
+     const evento = new Evento(req.body);
      
     try {
+        evento.user = req.uid;//add id del user
+
+        const eventoGuardado = await evento.save();
         res.status(201).json({
             ok:true ,
-            msg:'crear nuevo evento',
+            msg:'se creo nuevo evento',
+            evento:eventoGuardado
         });
         
     } catch (error) {
