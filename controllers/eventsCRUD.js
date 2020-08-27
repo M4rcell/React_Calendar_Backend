@@ -1,12 +1,16 @@
 const  {response} = require('express'); 
 const Evento = require('../models/Evento');//traer schema de modelo
 
-const getEventos = (req,res=response)=>{  
+const getEventos = async(req,res=response)=>{  
+
+    const eventos = await Evento.find()
+                                .populate('user','name');//rellenar el campo usuario con todo sus campos
 
     try {
         res.status(201).json({
             ok:true ,
-            msg:'obtener todo los eventos'
+            msg:'obtener todo los eventos',
+            eventos
         });
         
     } catch (error) {
