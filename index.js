@@ -22,10 +22,11 @@ app.use(express.json());
 
 
 // Rutas
-app.use('/api/auth', require('./routers/auth'));
 //TODO: auth  // new, login ,renew
+app.use('/api/auth', require('./routers/auth'));
 
 //TODO: CRUD de eventos
+app.use('/api/events', require('./routers/eventsCRUD'));
 
 
 
