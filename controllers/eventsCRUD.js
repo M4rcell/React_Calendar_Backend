@@ -20,7 +20,9 @@ const getEventos = (req,res=response)=>{
 }
 
 const crearEvento = (req,res=response)=>{  
-
+    //verificar que tenga el evento
+     console.log(req.body);
+     
     try {
         res.status(201).json({
             ok:true ,
@@ -42,7 +44,7 @@ const actualizarEvento = (req,res=response)=>{
     try {
         res.status(201).json({
             ok:true ,
-            msg:'el usuario se registro correctamente',
+            msg:'actualizar evento',
         });
         
     } catch (error) {
